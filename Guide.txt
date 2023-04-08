@@ -1,0 +1,96 @@
+Features need to do list
+1. Render songs
+2. Scroll top
+3. Play/ pause / seek
+4. CD rotate
+5. Next/ prev
+6. Random
+7. Next/ Repeat when ended
+8. Active song
+9. Scroll active song into view
+10. Play song when click
+
+
+
+
+Trước hết ta có một biến tên app kiểu object và tạo ra một cái key tên là songs với value là mảng các bài hát 
+(playlist) để dễ dàng quản lý các bài hát
+Để chương trình chỉ gọi duy nhất một hàm ta sẽ thêm một vài key value như sau cho object app
+const app = {
+      songs: [
+     
+      ],
+      
+      setConfig: function() {
+
+      },
+
+      render: function() {
+	//code render ra bài hát
+	//lấy các bài hát trong key songs ra apply vào html playlist
+      },
+
+      defineProperties: function() {
+	//Định nghĩa ra một số thuộc tính mới (GG từ khóa này) 
+	//Định nghĩa ra một cái thuộc tính tên là "currentSong" để có thể lấy ra được bài hát
+	hiện tại 
+	//
+      },
+
+      handleEvents: function () { 
+	/*Xử lý zoom in/out*/
+	//kéo lên co nhỏ dashboard, kéo xuống phóng to dashboard ra 
+	//B1: lắng nghe sự kiện scroll (nên dùng DOM EVENTS thay vì dùng events listener)
+	//B2: Khi scroll thì lấy ra pixel tại ví trí kéo
+
+	//Expectation là kéo lên bao nhiêu thì CD nhỏ hơn xuống bấy nhiêu và ngược lại
+	làm sao để tính ra được CD phải nhỏ xuống bao nhiêu hay tăng lên bấy nhiêu dựa trên 
+	pixel tại vị trí kéo vừa lấy ra được (
+	lưu ý: 
+		- CD được tạo ra như là một hình vuông, chỉ cần giảm width của CD là height sẽ 
+		giảm theo)
+		- Khi kéo nhanh quá thì CD không bị mất hoàn toàn do khi kéo nhanh pixel
+		tại vị trí kéo bằng số âm
+		- Khi kéo lên còn có hiệu ứng mờ dần (opacity)
+
+	//hint: Kích thước nhỏ lại của CD = kích thước của CD - kích thước tại lúc kéo lên
+      
+
+	/*Xử lý khi click play*/
+	//B1: Xử lý sao cho khi ấn vào nút play thì thêm class "playing" vào player và phát
+	nhạc, tìm hiểu các phương thức xử lý audio trong html (nên dùng onplay và onpause)
+	//B2: Xử lý kéo thanh phát nhạc, kéo tới đâu phát nhạc đến đó, có thể hiểu là làm sao
+	đó lấy ra số giây hiện tại của bài nhạc đang phát, tính ra % để apply vào trong thanh 
+	kéo, (thời gian tổng bài hát / thời gian hiện tại) * 100%
+	//B3: lấy ra progress và gán giá trị cho nó bằng công thức trên, lưu ý là làm tròn 
+	dưới, gán lại giá trị cho value (value)
+	//B4: Xử lý khi tua bài hát, từ phần trăm tính ngược ra số giây để mà và gán lại cho 
+	value khi có sự kiện onchange xảy ra 
+
+       },
+      
+      loadCurrentSong: function () {
+	//tải thông tin bài hát đầu tiên vào UI khi chạy ứng dụng
+	//Sửa tên bài hát, thumb, thẻ audio
+	//B1: lấy ra các thẻ chứa tên, thumb, audio bài hát
+	//B2: update (sửa) lại nội dung của từng thẻ vừa lấy ra 
+      },
+
+      start: function() {
+	this.defineProperties();
+        
+	this.handleEvents();
+	this.loadCurrentSong();
+	this.render();
+      }
+    
+    }
+
+    app.start();
+
+app.start()
+
+Idea cho từng phần:
+1. Render songs
+	Render ra từ key songs bằng cách add thêm các class song vào trong class playlist trong hàm function của key render
+	khi cuộn lên thì now playing display nhỏ lại, kéo xuống thì to ra vào trong hàm function của key handleEvents
